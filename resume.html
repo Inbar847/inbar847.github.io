@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Inbar Halutzy — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #aadcec;
+    --sky-deep: #82c5d9;
+    --paper: #faf6ec;
+    --ink: #16232e;
+    --ink-soft: #2d3f4f;
+    --coral: #ff8d6e;
+    --yellow: #ffd34d;
+    --green: #7bc4a4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    background: var(--sky);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  .page-wrap {
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .toolbar {
+    width: 100%; max-width: 880px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+    font-family: "JetBrains Mono", monospace; font-size: 12px;
+    letter-spacing: .15em; text-transform: uppercase;
+  }
+  .toolbar .back {
+    color: var(--ink); text-decoration: none; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border: 1.5px solid var(--ink); border-radius: 999px;
+    background: var(--paper);
+    transition: transform .2s, background .2s, color .2s;
+  }
+  .toolbar .back:hover { background: var(--ink); color: var(--paper); transform: translateX(-3px); }
+  .toolbar .download {
+    background: var(--ink); color: var(--paper); border: none; cursor: pointer;
+    font: inherit; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+    padding: 10px 18px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: transform .2s, background .2s, color .2s;
+  }
+  .toolbar .download:hover { background: var(--coral); color: var(--ink); transform: translateY(-2px); }
+
+  /* paper */
+  .paper {
+    width: 100%; max-width: 880px;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 64px 72px;
+    border: 1.5px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: 14px 14px 0 var(--ink);
+    position: relative;
+  }
+
+  /* header */
+  .cv-head {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 24px; align-items: end;
+    padding-bottom: 24px;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .cv-head h1 {
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 800;
+    font-size: clamp(40px, 6vw, 64px); line-height: .95;
+    letter-spacing: -.025em;
+  }
+  .cv-head h1 em {
+    font-style: italic; font-weight: 500;
+    background: linear-gradient(transparent 60%, var(--yellow) 60% 95%, transparent 95%);
+    padding: 0 4px;
+  }
+  .cv-head .role {
+    font-family: "JetBrains Mono", monospace; font-size: 12px;
+    letter-spacing: .25em; text-transform: uppercase;
+    color: var(--ink-soft); margin-top: 14px;
+  }
+  .cv-head .contacts {
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    text-align: right; line-height: 1.9;
+    color: var(--ink-soft);
+  }
+  .cv-head .contacts a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink-soft); }
+  .cv-head .contacts a:hover { color: var(--coral); }
+
+  /* summary */
+  .summary {
+    margin: 28px 0 8px;
+    font-size: 15px; line-height: 1.65;
+    max-width: 680px;
+  }
+  .summary strong { font-weight: 700; }
+
+  /* section */
+  .sec { margin-top: 32px; }
+  .sec-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 16px;
+  }
+  .sec-head .num {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    font-weight: 600; letter-spacing: .25em; color: var(--ink-soft);
+  }
+  .sec-head h2 {
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 700;
+    font-size: 24px; letter-spacing: -.01em;
+    flex-grow: 1;
+  }
+  .sec-head .line {
+    flex: 1; height: 1px; background: var(--ink); opacity: .25;
+  }
+
+  /* entries */
+  .entry { margin-bottom: 22px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-head {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: baseline; margin-bottom: 4px;
+  }
+  .entry-head h3 {
+    font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700;
+    font-size: 16px;
+  }
+  .entry-head .when {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: .12em; color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .entry .where {
+    font-style: italic; font-size: 14px; color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .entry p { font-size: 14px; line-height: 1.6; }
+  .entry ul { margin-top: 6px; padding-left: 18px; }
+  .entry ul li { font-size: 14px; line-height: 1.6; margin-bottom: 4px; }
+
+  /* skills */
+  .skills-grid {
+    display: grid; grid-template-columns: 160px 1fr; gap: 12px 24px;
+    align-items: start;
+  }
+  .skills-grid dt {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--ink-soft); padding-top: 4px;
+  }
+  .skills-grid dd { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(22,35,46,.06); color: var(--ink);
+  }
+
+  /* highlight stat row */
+  .quick {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin: 20px 0 0;
+  }
+  .quick .q { padding: 12px 14px; border: 1px dashed var(--ink-soft); border-radius: 8px; }
+  .quick .q .n {
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 800;
+    font-size: 26px; line-height: 1;
+  }
+  .quick .q .t {
+    font-family: "JetBrains Mono", monospace; font-size: 10px;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: var(--ink-soft); margin-top: 4px;
+  }
+
+  /* languages bar */
+  .langs { display: flex; flex-direction: column; gap: 10px; }
+  .lang-row {
+    display: grid; grid-template-columns: 100px 1fr 80px;
+    gap: 16px; align-items: center; font-size: 14px;
+  }
+  .lang-bar {
+    height: 6px; background: rgba(22,35,46,.08); border-radius: 999px; overflow: hidden;
+  }
+  .lang-bar > span {
+    display: block; height: 100%;
+    background: var(--ink); border-radius: 999px;
+  }
+  .lang-row .level {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-soft); text-align: right;
+  }
+
+  /* footer note */
+  .foot {
+    margin-top: 36px; padding-top: 18px;
+    border-top: 1px dashed var(--ink-soft);
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .foot .scribble {
+    font-family: "Caveat", cursive; font-size: 18px;
+    letter-spacing: 0; text-transform: none;
+    color: var(--coral); transform: rotate(-3deg);
+  }
+
+  /* responsive */
+  @media (max-width: 720px) {
+    .paper { padding: 36px 28px; }
+    .cv-head { grid-template-columns: 1fr; }
+    .cv-head .contacts { text-align: left; }
+    .skills-grid { grid-template-columns: 1fr; gap: 4px 0; }
+    .skills-grid dt { padding-top: 8px; }
+    .quick { grid-template-columns: repeat(2, 1fr); }
+    .lang-row { grid-template-columns: 80px 1fr 70px; gap: 10px; }
+  }
+
+  /* PRINT — for "Download PDF" via Cmd/Ctrl+P */
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    body, html { background: white; }
+    .toolbar { display: none; }
+    .page-wrap { padding: 0; }
+    .paper {
+      box-shadow: none; border: none; border-radius: 0;
+      max-width: 100%; padding: 0;
+    }
+    .cv-head h1 { font-size: 38px; }
+    .cv-head h1 em { background: none; padding: 0; }
+    .quick { page-break-inside: avoid; }
+    .entry, .sec { page-break-inside: avoid; }
+    a { color: var(--ink); }
+    .chip { background: #eee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <div class="paper">
+    <header class="cv-head">
+      <div>
+        <h1>Inbar <em>Halutzy</em>.</h1>
+        <div class="role">Computer Science · Third Year · Seeking Student Software Dev Role</div>
+      </div>
+      <div class="contacts">
+        <div><a href="mailto:inbar847@gmail.com">inbar847@gmail.com</a></div>
+        <div><a href="tel:+972547002748">+972 54-700-2748</a></div>
+        <div><a href="https://www.linkedin.com/in/inbar-halutzi-42065b3b8/" target="_blank">linkedin.com/in/inbar-halutzi</a></div>
+        <div><a href="https://github.com/Inbar847" target="_blank">github.com/Inbar847</a></div>
+      </div>
+    </header>
+
+    <p class="summary">
+      Computer-science student at <strong>Afeka College</strong> (GPA 87, three semesters left) with a semester abroad at the <strong>University of Bergamo</strong>. I build full-stack apps in <strong>React + TypeScript + FastAPI</strong>, real-time mobile experiences, and the occasional tactical AI in C++. Looking for a student software-development role where I can learn out loud and ship real things.
+    </p>
+
+    <div class="quick">
+      <div class="q"><div class="n">87</div><div class="t">GPA</div></div>
+      <div class="q"><div class="n">3</div><div class="t">Live projects</div></div>
+      <div class="q"><div class="n">3 yrs</div><div class="t">IDF leadership</div></div>
+      <div class="q"><div class="n">3</div><div class="t">Semesters left</div></div>
+    </div>
+
+    <section class="sec">
+      <div class="sec-head">
+        <span class="num">01</span><h2>Education</h2><span class="line"></span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>BSc in Computer Science</h3>
+          <span class="when">2023 — Present</span>
+        </div>
+        <div class="where">Afeka College of Engineering, Tel Aviv · GPA 87</div>
+        <p>Focused on advanced algorithms, OOP design, software engineering, and AI fundamentals. Three semesters remaining.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Erasmus Exchange · Computer Science</h3>
+          <span class="when">2025</span>
+        </div>
+        <div class="where">University of Bergamo, Italy</div>
+        <p>One semester abroad — coursework in distributed systems and software architecture, taught entirely in English.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head">
+        <span class="num">02</span><h2>Selected Projects</h2><span class="line"></span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Poker Night Ledger · <a href="https://poker-night-ledger-app.onrender.com" target="_blank" style="color:var(--coral)">live ↗</a></h3>
+          <span class="when">2025</span>
+        </div>
+        <div class="where">React Native · Expo · TypeScript · FastAPI · PostgreSQL · WebSockets · JWT</div>
+        <p>Real-time poker night manager. Player invitations, buy-in tracking, shared expenses, final chip counts and automatic settlement. WebSocket-based live updates so the table stays in sync as the night goes on.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Fitness Class Management Platform · <a href="https://fitness-frontend-0ncs.onrender.com" target="_blank" style="color:var(--coral)">live ↗</a></h3>
+          <span class="when">2025</span>
+        </div>
+        <div class="where">React · TypeScript · FastAPI · PostgreSQL · Docker · JWT</div>
+        <p>Full-stack platform with Trainee / Trainer / Admin roles, advanced class search & filtering, booking with waitlists, and an integrated payment flow. Designed with clean architecture, race-condition handling, and optimised paginated queries.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Tactical AI Simulation · <a href="https://github.com/Inbar847/Tactical-AI-Simulation" target="_blank" style="color:var(--coral)">github ↗</a></h3>
+          <span class="when">2024</span>
+        </div>
+        <div class="where">C++ · A* Pathfinding · OOP · Polymorphism</div>
+        <p>Turn-based tactical simulation with real-time A* pathfinding, modular agent behaviours, and structured team interactions. Strict object-oriented design with polymorphic units and event-driven combat.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head">
+        <span class="num">03</span><h2>Experience</h2><span class="line"></span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Squad Leader · IDF Paratroopers</h3>
+          <span class="when">2016 — 2019</span>
+        </div>
+        <div class="where">101st Battalion</div>
+        <p>Led a recruit training squad — responsible for the professional and personal development of dozens of soldiers, and for high-intensity operations under pressure. Where I learned that clarity, calm, and ownership beat noise.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Maritime Security Team Leader · MSC Cruises</h3>
+          <span class="when">2019 — 2020</span>
+        </div>
+        <div class="where">Mediterranean & Caribbean</div>
+        <p>Led a multinational security team across cruise itineraries — daily ops, incident response, and team coordination in a 24/7 environment.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Academic Mentor · Afeka College</h3>
+          <span class="when">2024 — Present</span>
+        </div>
+        <div class="where">Tutoring undergraduate CS students</div>
+        <p>One-on-one mentoring in algorithms, OOP, and intro programming — turning my coursework into other students' "aha" moments.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head">
+        <span class="num">04</span><h2>Skills</h2><span class="line"></span>
+      </div>
+      <dl class="skills-grid">
+        <dt>Languages</dt>
+        <dd>
+          <span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">SQL</span>
+        </dd>
+        <dt>Frontend</dt>
+        <dd>
+          <span class="chip">React</span><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">HTML / CSS</span>
+        </dd>
+        <dt>Backend</dt>
+        <dd>
+          <span class="chip">FastAPI</span><span class="chip">Node.js</span><span class="chip">PostgreSQL</span><span class="chip">WebSockets</span><span class="chip">JWT Auth</span><span class="chip">REST APIs</span>
+        </dd>
+        <dt>Tooling</dt>
+        <dd>
+          <span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Linux</span><span class="chip">CI / CD</span>
+        </dd>
+        <dt>Concepts</dt>
+        <dd>
+          <span class="chip">OOP</span><span class="chip">Algorithms</span><span class="chip">A* Pathfinding</span><span class="chip">System Design</span>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head">
+        <span class="num">05</span><h2>Languages</h2><span class="line"></span>
+      </div>
+      <div class="langs">
+        <div class="lang-row">
+          <span>Hebrew</span>
+          <div class="lang-bar"><span style="width:100%"></span></div>
+          <span class="level">Native</span>
+        </div>
+        <div class="lang-row">
+          <span>English</span>
+          <div class="lang-bar"><span style="width:90%"></span></div>
+          <span class="level">Fluent</span>
+        </div>
+        <div class="lang-row">
+          <span>Spanish</span>
+          <div class="lang-bar"><span style="width:50%"></span></div>
+          <span class="level">Intermediate</span>
+        </div>
+        <div class="lang-row">
+          <span>Italian</span>
+          <div class="lang-bar"><span style="width:40%"></span></div>
+          <span class="level">Basic</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <span>Updated · May 2026</span>
+      <span class="scribble">— thanks for reading ✦</span>
+      <span>Page 1 / 1</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
